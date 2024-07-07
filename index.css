@@ -1,0 +1,13 @@
+
+.checkbox {
+    margin-right: 10px;
+}
+
+body {
+ background-color:#d179bb;
+ font-family: Helvetica;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ };
+
