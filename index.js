@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add items
     addBtn.addEventListener('click', () => {
         const item = itemInput.value;
-        if(item) {
+        if (item) {
             list.push(item);
             addItemToList(item);
             itemInput.value = '';
@@ -30,9 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.classList.remove('done');
             }
         });
+
+        const span = document.createElement('span');
+        span.textContent = item;
+        span.addEventListener('dblclick', () => {
+            editItem(span);
+        });
         
         li.appendChild(checkbox);
-        li.appendChild(document.createTextNode(item));
+        li.appendChild(span);
         itemList.appendChild(li);
     }
 
@@ -43,33 +49,29 @@ document.addEventListener('DOMContentLoaded', () => {
         items.forEach(item => item.remove());
     });
     
-function editItem(span) {
-    
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = span.textContent; 
+    // Edit item
+    function editItem(span) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = span.textContent; 
 
-    
-    const saveEdit = () => {
-        span.textContent = input.value; 
-        span.style.display = ''; 
-        input.replaceWith(span); 
-    };
+        const saveEdit = () => {
+            span.textContent = input.value; 
+            span.style.display = ''; 
+            input.replaceWith(span); 
+        };
 
-    
-    input.addEventListener('blur', saveEdit);
-   
-    input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            saveEdit();
-        }
-    });
+        input.addEventListener('blur', saveEdit);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                saveEdit();
+            }
+        });
 
-    
-    span.replaceWith(input);
-    input.focus(); 
-}
-
+        span.replaceWith(input);
+        input.focus(); 
+    }
 });
+
 
 
