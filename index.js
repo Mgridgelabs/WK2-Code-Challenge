@@ -42,6 +42,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const items = itemList.querySelectorAll('li');
         items.forEach(item => item.remove());
     });
+    
+function editItem(span) {
+    
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = span.textContent; 
+
+    
+    const saveEdit = () => {
+        span.textContent = input.value; 
+        span.style.display = ''; 
+        input.replaceWith(span); 
+    };
+
+    
+    input.addEventListener('blur', saveEdit);
+   
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            saveEdit();
+        }
+    });
+
+    
+    span.replaceWith(input);
+    input.focus(); 
+}
+
 });
 
 
